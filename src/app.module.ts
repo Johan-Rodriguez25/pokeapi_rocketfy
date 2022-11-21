@@ -4,6 +4,8 @@ import {AuthModule} from './auth/auth.module'
 import {DatabaseModule} from './database/database.module'
 import {PokemonsModule} from './pokemons/pokemons.module'
 import {UsersModule} from './users/users.module'
+import {Shipping_ordersModule} from './shipping_orders/shipping_orders.module'
+import {ShippingsModule} from './shippings/shippings.module'
 
 @Module({
   imports: [
@@ -13,7 +15,9 @@ import {UsersModule} from './users/users.module'
     DatabaseModule,
     AuthModule,
     UsersModule,
-    PokemonsModule
+    PokemonsModule,
+    Shipping_ordersModule,
+    ShippingsModule
   ],
   controllers: [],
   providers: []
