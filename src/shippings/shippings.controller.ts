@@ -35,34 +35,8 @@ export class ShippingsController {
   @Get()
   @ApiOkResponse({description: 'The shippings were returned successfully'})
   @ApiForbiddenResponse({description: 'Unauthorized request'})
-  async findAll(@Res() res: Response): Promise<any> {
-    try {
-      const shippings = await this.shippingsService.findAll()
-      let result = []
-
-      for (let i = 0; i < shippings.length; i++) {
-        let fecha: any = new Date(
-          shippings[i].shipping_order.created_time * 1000
-        )
-        let startFecha: any = new Date(fecha.getFullYear(), 0, 1)
-        let year: number = fecha.getFullYear()
-        let days: number = Math.floor(
-          (fecha - startFecha) / (24 * 60 * 60 * 1000)
-        )
-        let week: number = Math.ceil(days / 7)
-
-        result.push({
-          status_shipping: shippings[i].status,
-          year: year,
-          week: week,
-          total_amount: shippings[i].shipping_order.total_amount
-        })
-      }
-
-      return res.status(200).json(result)
-    } catch (e) {
-      res.status(e.status).json(e.message)
-    }
+  async findAll(): Promise<Shipping[]> {
+    return this.shippingsService.findAll()
   }
 
   @UseGuards(JwtAuthGuard)
